@@ -67,7 +67,7 @@ class MyHomePage extends StatelessWidget {
                         // 商品の値段を表示
                         child: Text(
                           // amountはdoubleなのでtoStringでstring型に直す必要がある。
-                          tx.amount.toString(),
+                          '${tx.amount}円' // '\$${tx.amount}',
                           // 値段の文字を装飾する
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
