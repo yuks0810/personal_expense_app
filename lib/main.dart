@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+
 import './transaction.dart';
 import 'package:personal_expense_app/transaction.dart';
 
@@ -20,13 +22,13 @@ class MyHomePage extends StatelessWidget {
       id: 't1',
       title: 'スニーカー',
       amount: 7000,
-      data: DateTime.now(),
+      date: DateTime.now(),
     ),
     Transaction(
       id: 't2',
       title: '日用品',
       amount: 12000,
-      data: DateTime.now(),
+      date: DateTime.now(),
     ),
   ];
 
@@ -67,7 +69,7 @@ class MyHomePage extends StatelessWidget {
                         // 商品の値段を表示
                         child: Text(
                           // amountはdoubleなのでtoStringでstring型に直す必要がある。
-                          '${tx.amount}円' // '\$${tx.amount}',
+                          '${tx.amount}円', // '\$${tx.amount}',
                           // 値段の文字を装飾する
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
@@ -87,7 +89,7 @@ class MyHomePage extends StatelessWidget {
                           ),
                           // 商品の購入日を表示
                           Text(
-                            tx.data.toString(),
+                            DateFormat.yMd().add_jm().format(tx.date), // import 'package:intl/intl.dart';でimportした日付フォーマットを使っている
                             style: TextStyle(color: Colors.grey),
                           ),
                         ],
