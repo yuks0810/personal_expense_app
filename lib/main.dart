@@ -31,6 +31,10 @@ class MyHomePage extends StatelessWidget {
       date: DateTime.now(),
     ),
   ];
+  // String titleInput;
+  // String amountInput;
+  final titleController = TextEditingController();
+  final amountController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -39,9 +43,8 @@ class MyHomePage extends StatelessWidget {
           title: Text('Flutter App'),
         ),
         body: Column(
-          mainAxisAlignment: MainAxisAlignment
-              .spaceEvenly, // Columnのなかでどのようにそれぞれのカードを配置するかを決定する
-          crossAxisAlignment: CrossAxisAlignment.center,
+          // mainAxisAlignment: MainAxisAlignment.start, // Columnのなかでどのようにそれぞれのカードを配置するかを決定する
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             Container(
               width: double.infinity, // 横幅いっぱいに広げる
@@ -49,6 +52,41 @@ class MyHomePage extends StatelessWidget {
                 color: Colors.blue,
                 child: Text('CHART!'),
                 elevation: 5,
+              ),
+            ),
+            Card(
+              elevation: 5,
+              child: Container(
+                padding: EdgeInsets.all(10),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.end, //ボタンを右側に配置Ï
+                  children: <Widget>[
+                    // TextFieldでキーボードがポップアップするinputを表示可能
+                    TextField(
+                      decoration: InputDecoration(labelText: 'Title'),
+                      controller: titleController,
+                      // onChanged: (val) {
+                      //   // onChangedのトリガー後の処理を書く
+                      //   titleInput = val;
+                      // },
+                    ),
+                    TextField(
+                      decoration: InputDecoration(labelText: 'Amount'),
+                      controller: amountController,
+                      // onChanged: (val) {
+                      //   amountInput = val;
+                      // },
+                    ),
+                    FlatButton(
+                      child: Text('Add Transaction'),
+                      textColor: Colors.purple,
+                      onPressed: () {
+                        print(titleController.text);
+                        print(amountController.text);
+                      },
+                    ),
+                  ],
+                ),
               ),
             ),
             Column(
@@ -89,7 +127,8 @@ class MyHomePage extends StatelessWidget {
                           ),
                           // 商品の購入日を表示
                           Text(
-                            DateFormat.yMd().add_jm().format(tx.date), // import 'package:intl/intl.dart';でimportした日付フォーマットを使っている
+                            DateFormat.yMd().add_jm().format(tx
+                                .date), // import 'package:intl/intl.dart';でimportした日付フォーマットを使っている
                             style: TextStyle(color: Colors.grey),
                           ),
                         ],
