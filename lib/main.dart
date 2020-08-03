@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
-
-import './transaction.dart';
-import 'package:personal_expense_app/transaction.dart';
+import './widgets/user_transaction.dart';
 
 void main() => runApp(MyApp());
 
@@ -17,20 +14,6 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatelessWidget {
-  final List<Transaction> transactions = [
-    Transaction(
-      id: 't1',
-      title: 'スニーカー',
-      amount: 7000,
-      date: DateTime.now(),
-    ),
-    Transaction(
-      id: 't2',
-      title: '日用品',
-      amount: 12000,
-      date: DateTime.now(),
-    ),
-  ];
   // String titleInput;
   // String amountInput;
   final titleController = TextEditingController();
@@ -54,90 +37,7 @@ class MyHomePage extends StatelessWidget {
                 elevation: 5,
               ),
             ),
-            Card(
-              elevation: 5,
-              child: Container(
-                padding: EdgeInsets.all(10),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.end, //ボタンを右側に配置Ï
-                  children: <Widget>[
-                    // TextFieldでキーボードがポップアップするinputを表示可能
-                    TextField(
-                      decoration: InputDecoration(labelText: 'Title'),
-                      controller: titleController,
-                      // onChanged: (val) {
-                      //   // onChangedのトリガー後の処理を書く
-                      //   titleInput = val;
-                      // },
-                    ),
-                    TextField(
-                      decoration: InputDecoration(labelText: 'Amount'),
-                      controller: amountController,
-                      // onChanged: (val) {
-                      //   amountInput = val;
-                      // },
-                    ),
-                    FlatButton(
-                      child: Text('Add Transaction'),
-                      textColor: Colors.purple,
-                      onPressed: () {
-                        print(titleController.text);
-                        print(amountController.text);
-                      },
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            Column(
-              children: transactions.map((tx) {
-                // mapでリストの数分eachを回しているような感じ
-                return Card(
-                  child: Row(
-                    children: <Widget>[
-                      Container(
-                        margin:
-                            EdgeInsets.symmetric(vertical: 10, horizontal: 15),
-                        // 値段の周りにボーダーを表示
-                        decoration: BoxDecoration(
-                          border: Border.all(color: Colors.purple, width: 2),
-                        ),
-                        // 値段の周りにpaddingを追加
-                        padding: EdgeInsets.all(10),
-                        // 商品の値段を表示
-                        child: Text(
-                          // amountはdoubleなのでtoStringでstring型に直す必要がある。
-                          '${tx.amount}円', // '\$${tx.amount}',
-                          // 値段の文字を装飾する
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 13,
-                            color: Colors.purple,
-                          ),
-                        ),
-                      ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          // 商品タイトルをColumnのなかに表示
-                          Text(
-                            tx.title,
-                            style: TextStyle(
-                                fontSize: 12, fontWeight: FontWeight.bold),
-                          ),
-                          // 商品の購入日を表示
-                          Text(
-                            DateFormat.yMd().add_jm().format(tx
-                                .date), // import 'package:intl/intl.dart';でimportした日付フォーマットを使っている
-                            style: TextStyle(color: Colors.grey),
-                          ),
-                        ],
-                      )
-                    ],
-                  ),
-                );
-              }).toList(),
-            ),
+            UserTransactions() //ここで、new_transactionとuser_transactionを呼び出している
           ],
         ));
   }
