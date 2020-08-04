@@ -22,24 +22,36 @@ class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text('Flutter App'),
-        ),
-        body: Column(
-          // mainAxisAlignment: MainAxisAlignment.start, // Columnのなかでどのようにそれぞれのカードを配置するかを決定する
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: <Widget>[
-            Container(
-              width: double.infinity, // 横幅いっぱいに広げる
-              child: Card(
-                color: Colors.blue,
-                child: Text('CHART!'),
-                elevation: 5,
-              ),
+      appBar: AppBar(
+        title: Text('Flutter App'),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.add),
+            onPressed: () {},
+          ),
+        ],
+      ),
+      body: Column(
+        // mainAxisAlignment: MainAxisAlignment.start, // Columnのなかでどのようにそれぞれのカードを配置するかを決定する
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: <Widget>[
+          Container(
+            width: double.infinity, // 横幅いっぱいに広げる
+            child: Card(
+              color: Colors.blue,
+              child: Text('CHART!'),
+              elevation: 5,
             ),
-            UserTransactions() //ここで、new_transactionとuser_transactionを呼び出している
-          ],
-        ));
+          ),
+          UserTransactions() //ここで、new_transactionとuser_transactionを呼び出している
+        ],
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.add),
+        onPressed: () {},
+      ),
+    );
   }
 }
 
