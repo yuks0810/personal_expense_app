@@ -33,7 +33,7 @@ class TransactionList extends StatelessWidget {
                   // 商品の値段を表示
                   child: Text(
                     // amountはdoubleなのでtoStringでstring型に直す必要がある。
-                    '${transactions[index].amount}円', // '\$${tx.amount}',
+                    '${transactions[index].amount.toStringAsFixed(2)}円', // '\$${tx.amount}',
                     // 値段の文字を装飾する
                     style: TextStyle(
                       fontWeight: FontWeight.bold,

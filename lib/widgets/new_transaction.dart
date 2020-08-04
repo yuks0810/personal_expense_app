@@ -12,6 +12,19 @@ class NewTransaction extends StatelessWidget {
 
   NewTransaction(this.addTx);
 
+  void submitData() {
+    final enteredTitle = titleController.text;
+    final enteredAmount = int.parse(
+        amountController.text); // int.parseでもしint以外の数値を入力された場合にエラーを返すようになる。
+
+    if (enteredTitle.isEmpty || enteredAmount <= 0) {
+      // 値段がマイナスの時とTitleが空の時はreturnで返す
+      return;
+    }
+
+    addTx(enteredTitle, enteredAmount);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -33,6 +46,12 @@ class NewTransaction extends StatelessWidget {
             TextField(
               decoration: InputDecoration(labelText: 'Amount'),
               controller: amountController,
+              // 数字だけのキーボードがポップアップする
+              keyboardType: TextInputType.number,
+              // doneボタンが押された時に発火するようにする
+              // 無名関数を定義する
+              // (_)として使わない引数をアンダースコアにするのは慣習
+              onSubmitted: (_) => submitData,
               // onChanged: (val) {
               //   amountInput = val;
               // },
@@ -40,14 +59,14 @@ class NewTransaction extends StatelessWidget {
             FlatButton(
               child: Text('Add Transaction'),
               textColor: Colors.purple,
-              onPressed: () {
-                // 新しくトランザクションを追加するのに使用するメソッドを呼び出している
-                // 引数はuser_transaction.dartで引数として定義されている
-                addTx(
-                  titleController.text,
-                  int.parse(amountController.text), // int.parseでもしint以外の数値を入力された場合にエラーを返すようになる。
-                );
-              },
+              onPressed: submitData,
+              // 新しくトランザクションを追加するのに使用するメソッドを呼び出している
+              // 引数はuser_transaction.dartで引数として定義されている
+              // addTx(
+              //   titleController.text,
+              //   int.parse(amountController
+              //       .text), // int.parseでもしint以外の数値を入力された場合にエラーを返すようになる。
+              // );
             ),
           ],
         ),
