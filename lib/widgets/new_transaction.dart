@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import './user_transaction.dart';
-
 class NewTransaction extends StatelessWidget {
   // user_transaction.dartで定義されている_addNewTransactionをaddTxというメソッド名に定義し直して実行できるようにする。
   // 関数を定義して、その関数をchildとかで使いたいクラスに渡して、使いたいクラス上でfinal Function [メソッド名]で定義することで外部からprivateメソッドにアクセスできる
