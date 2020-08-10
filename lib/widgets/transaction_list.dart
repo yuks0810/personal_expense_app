@@ -51,8 +51,7 @@ class TransactionList extends StatelessWidget {
                     // 商品タイトルをColumnのなかに表示
                     Text(
                       transactions[index].title,
-                      style:
-                          TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
+                      style: Theme.of(context).textTheme.title,
                     ),
                     // 商品の購入日を表示
                     Text(
