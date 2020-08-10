@@ -1,14 +1,20 @@
 import 'package:flutter/material.dart';
 
-class NewTransaction extends StatelessWidget {
+class NewTransaction extends StatefulWidget {
   // user_transaction.dartで定義されている_addNewTransactionをaddTxというメソッド名に定義し直して実行できるようにする。
   // 関数を定義して、その関数をchildとかで使いたいクラスに渡して、使いたいクラス上でfinal Function [メソッド名]で定義することで外部からprivateメソッドにアクセスできる
   final Function addTx;
 
-  final titleController = TextEditingController();
-  final amountController = TextEditingController();
-
   NewTransaction(this.addTx);
+
+  @override
+  _NewTransactionState createState() => _NewTransactionState();
+}
+
+class _NewTransactionState extends State<NewTransaction> {
+  final titleController = TextEditingController();
+
+  final amountController = TextEditingController();
 
   void submitData() {
     final enteredTitle = titleController.text;
@@ -20,7 +26,12 @@ class NewTransaction extends StatelessWidget {
       return;
     }
 
-    addTx(enteredTitle, enteredAmount);
+    widget.addTx(
+      enteredTitle,
+      enteredAmount,
+    );
+
+    Navigator.of(context).pop();
   }
 
   @override
